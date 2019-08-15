@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
+    username: root
+    password: 123456
+
+  thymeleaf:
+    encoding: utf-8
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/
+
+# mybatis:
+  # typeAliasesPackage: com.hdy.student.entity
+
