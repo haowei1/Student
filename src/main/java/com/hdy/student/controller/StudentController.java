@@ -1,10 +1,13 @@
 package com.hdy.student.controller;
 
+import com.hdy.student.entity.ResultType;
 import com.hdy.student.entity.Student;
 import com.hdy.student.service.StudentService;
+import com.hdy.student.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,26 +26,6 @@ public class StudentController {
     private StudentService studentServiceImpl;
 
     /**
-     * helloWorld
-     * @return
-     */
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String hello(){
-        return "hello world";
-    }
-
-    /**
-     * 查询全部
-     * @return
-     */
-    @RequestMapping("/sel")
-    @ResponseBody
-    public String sel(){
-        return studentServiceImpl.selAll().toString();
-    }
-
-    /**
      * 根据id查询
      * @return
      */
@@ -53,32 +36,38 @@ public class StudentController {
     }
 
     /**
-     * 新增
+     * 新增学生
+     * @param student
      * @return
      */
-    @RequestMapping("ins")
+    @RequestMapping("insStu")
     @ResponseBody
-    public String ins() {
-        Student student = new Student("王五", "1", 20, "1843522", "8748", "dt");
+    public String insStu(Student student) {
         int i = studentServiceImpl.insStu(student);
         if (i > 0) {
-            return "Ok";
+            return "200";
         }
         return "Err";
     }
 
+    @RequestMapping("/upd.html")
+    public String showUpd(ModelMap map, int id){
+        map.addAttribute("index", id);
+        return "upd.html";
+    }
+
+
     /**
-     * 删除
-     * @param map
+     * 根据id删除
+     * @param id
      * @return
      */
-    @RequestMapping("del")
+    @RequestMapping("del/{id}")
     @ResponseBody
-    public String del(@RequestBody Map<String, Object> map) {
-        int id = (int) map.get("id");
+    public String del(@PathVariable int id) {
         int i = studentServiceImpl.delStuById(id);
         if (i > 0) {
-            return "Ok";
+            return "200";
         }
         return "Err";
     }
@@ -87,27 +76,28 @@ public class StudentController {
      * 更新
      * @return
      */
-    @RequestMapping("upd")
+    @RequestMapping("updStu")
     @ResponseBody
-    public String upd() {
-        Student student = new Student(1,"王五", "1", 20, "1843522", "8748", "大同");
+    public String updStu(Student student) {
         int i = studentServiceImpl.updById(student);
         if (i > 0) {
-            return "Ok";
+            return "200";
         }
         return "Err";
     }
 
     /**
-     *
-     * 显示 Thymeleaf 页面
-     * @param map
+     * 查询所有
      * @return
      */
-    @RequestMapping("/")
-    public String index(ModelMap map) {
-        map.addAttribute("index", "哈哈哈");
-        return "show";
+    @RequestMapping("/selAll")
+    @ResponseBody
+    public ResultType show() {
+        ResultType rt = new ResultType();
+        rt.setCode(0);
+        rt.setMsg("请求成功");
+        rt.setData(studentServiceImpl.selAll());
+        return rt;
     }
 
 }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="/layui/layui.js"></script>
+<script src="/js/jquery-1.9.1.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#test'
+            ,height: 312
+            ,url: '/student/selAll' //数据接口
+            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,page: true //开启分页
+            ,toolbar: '#toolbarDemo'
+            ,response: {
+                dataName: 'data'
+            }
+            ,cols: [ //设置表头
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+                    ,{field: 'name', title: '用户名'}
+                    ,{field: 'password', title: '密码'}
+                    ,{field: 'age', title: '年龄'}
+                    ,{field: 'phone', title: '电话'}
+                    ,{field: 'email', title: '邮箱'}
+                    ,{field: 'city', title: '城市'}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]
+            ]
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                    $.post(
+                        "/student/del/" + index
+                        ,data
+                        ,function (data) {
+                            if(data.code == 200){
+                                layer.msg("删除成功");
+                            }
+                        }
+                    )
+                });
+
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data
+                }, function(value, index){
+                    /*obj.update({
+                        email: value
+                    });
+                    layer.close(index);*/
+                    $.post("upd.html?id=" + index)
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

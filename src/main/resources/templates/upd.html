@@ -11,10 +11,11 @@
 </html>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>添加学生</legend>
+    <legend>编辑学生信息</legend>
 </fieldset>
 
-<form class="layui-form" action="/student/insStu">
+<form class="layui-form" action="/student/updStu">
+    <input type="hidden", name="id" value = th:text="${index}">
     <div class="layui-form-item">
         <label class="layui-form-label">姓名：</label>
         <div class="layui-input-block">
@@ -60,7 +61,7 @@
 
     <div class="layui-form-item" style="margin-top: 30px">
         <div class="layui-input-block">
-            <button class="layui-btn" type="submit">立即提交</button> <!-- lay-submit="" lay-filter="demo1" -->
+            <button class="layui-btn" type="submit">确定修改</button> <!-- lay-submit="" lay-filter="demo1" -->
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
