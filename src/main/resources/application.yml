@@ -6,7 +6,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
     username: root
-    password: 123456
+    password: zhanghuan
+    type: com.alibaba.druid.pool.DruidDataSource
 
   thymeleaf:
     encoding: utf-8

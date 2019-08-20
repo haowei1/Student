@@ -18,7 +18,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" id="bj">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script src="/layui/layui.js"></script>
@@ -30,7 +30,6 @@
         //第一个实例
         table.render({
             elem: '#test'
-            ,height: 312
             ,url: '/student/selAll' //数据接口
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,page: true //开启分页
@@ -78,9 +77,10 @@
             if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();
+                    var id = data.id;
                     layer.close(index);
                     $.post(
-                        "/student/del/" + index
+                        "/student/del/" + id
                         ,data
                         ,function (data) {
                             if(data.code == 200){
@@ -91,16 +91,27 @@
                 });
 
             } else if(obj.event === 'edit'){
-                layer.prompt({
+                layer.confirm("确定编辑吗？", function (index) {
+                    var id = data.id;
+                    window.location.href="upd.html?id=" + id;
+                })
+                // $(function (index){ //执行函数
+                // });
+
+                // $.post("upd.html?id=" + index,function (data) {
+                //     return false;
+                // });
+                // layer.
+               /* layer.prompt({
                     formType: 2
-                    ,value: data
+                    ,value: data.id
                 }, function(value, index){
-                    /*obj.update({
+                    obj.update({
                         email: value
                     });
-                    layer.close(index);*/
-                    $.post("upd.html?id=" + index)
-                });
+                    layer.close(index);
+
+                });*/
             }
         });
     });
