@@ -1,4 +1,4 @@
-package com.example.yhxct.model;
+package com.hdy.student.model;
 
 import java.util.ArrayList;
 import java.util.List;

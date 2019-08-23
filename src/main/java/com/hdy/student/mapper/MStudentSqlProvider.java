@@ -1,12 +1,14 @@
-package com.example.yhxct.mapper;
+package com.hdy.student.mapper;
 
-import com.example.yhxct.model.MStudent;
-import com.example.yhxct.model.MStudentExample.Criteria;
-import com.example.yhxct.model.MStudentExample.Criterion;
-import com.example.yhxct.model.MStudentExample;
+
+import com.hdy.student.model.MStudent;
+import com.hdy.student.model.MStudentExample;
+import com.hdy.student.model.MStudentExample.Criterion;
+import com.hdy.student.model.MStudentExample.Criteria;
+import org.apache.ibatis.jdbc.SQL;
+
 import java.util.List;
 import java.util.Map;
-import org.apache.ibatis.jdbc.SQL;
 
 public class MStudentSqlProvider {
 
@@ -70,9 +72,9 @@ public class MStudentSqlProvider {
     public String selectByExample(MStudentExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
-            sql.SELECT_DISTINCT("uuid");
+            sql.SELECT_DISTINCT("id");
         } else {
-            sql.SELECT("uuid");
+            sql.SELECT("id");
         }
         sql.SELECT("name");
         sql.SELECT("age");

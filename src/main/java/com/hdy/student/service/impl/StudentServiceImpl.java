@@ -1,6 +1,6 @@
 package com.hdy.student.service.impl;
 
-import com.hdy.student.entity.Student;
+import com.hdy.student.model.Student;
 import com.hdy.student.mapper.StudentMapper;
 import com.hdy.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

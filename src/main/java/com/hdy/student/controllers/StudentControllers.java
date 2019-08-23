@@ -1,8 +1,8 @@
-package com.hdy.student.controller;
+package com.hdy.student.controllers;
 
+import com.hdy.student.model.MStudent;
 import com.hdy.student.model.ResultType;
-import com.hdy.student.model.Student;
-import com.hdy.student.service.StudentService;
+import com.hdy.student.service.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/8/13
  */
 @RestController
-@RequestMapping("student")
-public class StudentController {
+@RequestMapping("students")
+public class StudentControllers {
 
     @Autowired
-    private StudentService studentServiceImpl;
+    private StudentServices studentServiceImpls;
 
     /**
      * 根据id查询
@@ -25,7 +25,8 @@ public class StudentController {
      */
     @RequestMapping("selId")
     public String selId(){
-        return studentServiceImpl.selById(1).toString();
+        System.out.println("4444444444");
+        return studentServiceImpls.selById(6).toString();
     }
 
     /**
@@ -34,8 +35,9 @@ public class StudentController {
      * @return
      */
     @RequestMapping("insStu")
-    public String insStu(Student student) {
-        int i = studentServiceImpl.insStu(student);
+    public String insStu(MStudent student) {
+        System.out.println("555555555555555");
+        int i = studentServiceImpls.insStu(student);
         if (i > 0) {
             return "200";
         }
@@ -49,7 +51,8 @@ public class StudentController {
      */
     @RequestMapping("del/{id}")
     public String del(@PathVariable int id) {
-        int i = studentServiceImpl.delStuById(id);
+        System.out.println("222222222222");
+        int i = studentServiceImpls.delStuById(id);
         if (i > 0) {
             return "200";
         }
@@ -61,8 +64,9 @@ public class StudentController {
      * @return
      */
     @RequestMapping("updStu")
-    public String updStu(Student student) {
-        int i = studentServiceImpl.updById(student);
+    public String updStu(MStudent student) {
+        System.out.println("33333333333");
+        int i = studentServiceImpls.updById(student);
         if (i > 0) {
             return "200";
         }
@@ -75,10 +79,11 @@ public class StudentController {
      */
     @RequestMapping("/selAll")
     public ResultType show() {
+        System.out.println("11111111111");
         ResultType rt = new ResultType();
         rt.setCode(0);
         rt.setMsg("请求成功");
-        rt.setData(studentServiceImpl.selAll());
+        rt.setData(studentServiceImpls.selAll());
         return rt;
     }
 

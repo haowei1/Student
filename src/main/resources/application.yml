@@ -7,7 +7,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
     username: root
     password: zhanghuan
-    type: com.alibaba.druid.pool.DruidDataSource
+    #type: com.alibaba.druid.pool.DruidDataSource
 
   thymeleaf:
     encoding: utf-8

@@ -1,9 +1,7 @@
 package com.hdy.student.mapper;
 
-import com.hdy.student.entity.Student;
+import com.hdy.student.model.Student;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,7 +10,7 @@ import java.util.List;
  * @date 2019/8/13
  */
 @Mapper
-@Repository
+//@Repository
 public interface StudentMapper {
 
     /**

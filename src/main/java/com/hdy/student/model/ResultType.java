@@ -1,4 +1,4 @@
-package com.hdy.student.entity;
+package com.hdy.student.model;
 
 public class ResultType {
 

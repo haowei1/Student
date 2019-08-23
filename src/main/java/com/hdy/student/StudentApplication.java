@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
  * @date 2019/8/13
  */
 @SpringBootApplication
-@MapperScan("com.example.yhxct.mapper")
+//@MapperScan("com.hdy.mapper")
 public class StudentApplication {
 
     public static void main(String[] args) {

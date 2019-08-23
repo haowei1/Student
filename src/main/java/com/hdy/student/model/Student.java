@@ -1,4 +1,4 @@
-package com.hdy.student.entity;
+package com.hdy.student.model;
 
 /**
  * @author m760384371

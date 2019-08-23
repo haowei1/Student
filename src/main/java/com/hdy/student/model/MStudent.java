@@ -1,4 +1,4 @@
-package com.example.yhxct.model;
+package com.hdy.student.model;
 
 public class MStudent {
     /**
